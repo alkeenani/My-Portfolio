@@ -23,8 +23,8 @@
   --spacing-xl: 10rem;
 
   /* Typography */
-  --font-main: 'Inter', 'Segoe UI', sans-serif;
-  --font-heading: 'Outfit', 'Segoe UI', sans-serif;
+  --font-main: 'Cairo', 'Inter', 'Segoe UI', sans-serif;
+  --font-heading: 'Cairo', 'Outfit', 'Segoe UI', sans-serif;
 }
 
 [data-theme="dark"] {
@@ -60,7 +60,7 @@
   --glass-blur: blur(15px);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap');
 
 * {
   box-sizing: border-box;
