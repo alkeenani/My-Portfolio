@@ -1,0 +1,133 @@
+:root {
+  /* Premium Colors - Light Mode */
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --text-secondary: #555555;
+  --primary-color: #2563eb; /* Royal Blue */
+  --primary-glow: rgba(37, 99, 235, 0.3);
+  --accent-color: #f59e0b; /* Amber */
+  --card-bg: rgba(255, 255, 255, 0.7); /* Glass effect base */
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  
+  /* Glassmorphism Utilities */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --glass-blur: blur(12px);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 5rem;
+  --spacing-xl: 10rem;
+
+  /* Typography */
+  --font-main: 'Inter', 'Segoe UI', sans-serif;
+  --font-heading: 'Outfit', 'Segoe UI', sans-serif;
+}
+
+[data-theme="dark"] {
+  /* Premium Colors - Dark Mode */
+  --bg-color: #050510; /* Deep Blue-Black */
+  --text-color: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --primary-color: #60a5fa; /* Cyan/Blue */
+  --primary-glow: rgba(96, 165, 250, 0.4);
+  --accent-color: #fbbf24;
+  --card-bg: rgba(20, 20, 35, 0.6);
+  --nav-bg: rgba(5, 5, 16, 0.85);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="winter"] {
+  /* Winter Mode ❄ */
+  --bg-color: #e0f7fa; /* Icy Blue */
+  --text-color: #006064; /* Deep Cyan */
+  --text-secondary: #00838f;
+  --primary-color: #00bcd4; /* Cyan */
+  --primary-glow: rgba(0, 188, 212, 0.5);
+  --accent-color: #84ffff;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --nav-bg: rgba(224, 247, 250, 0.9);
+  --border-color: rgba(178, 235, 242, 0.8);
+  --shadow: 0 8px 30px rgba(0, 188, 212, 0.15);
+  
+  --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+  --glass-blur: blur(15px);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* cursor: none !important; - Removed to keep default cursor */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Utility Class for Glass Cards */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--shadow);
+  border-radius: 16px;
+}
