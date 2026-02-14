@@ -2,6 +2,7 @@
 import React from 'react';
 import './Hero.css';
 import SocialLinks from '../SocialLinks/SocialLinks';
+import heroImg from '../../assets/img/IMG.png';
 
 interface HeroProps {
   t: {
@@ -115,7 +116,7 @@ const Hero: React.FC<HeroProps> = ({ t }) => {
           <div className="glass-card hero-card-bg"></div>
           <div className="hero-image-wrapper">
             <img 
-              src="../src/assets/img//IMG.png" 
+              src={heroImg} 
               alt="Profile" 
               className="hero-image"
               draggable="false"
