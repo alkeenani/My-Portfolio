@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Hero from '../components/Hero/Hero';
 import About from '../components/About/About';
+import Education from '../components/Education/Education';
+import Services from '../components/Services/Services';
 import Skills from '../components/Skills/Skills';
 import Projects from '../components/Projects/Projects';
 import Contact from '../components/Contact/Contact';
@@ -25,6 +27,8 @@ const Home: React.FC = () => {
       <Hero t={t.hero} />
       <main>
         <About t={t.about} />
+        <Education t={t.education} />
+        <Services t={t.services} />
         <Skills t={t.skills} />
         <Projects t={t.projects} language={language} />
         <Contact t={t.contact} />

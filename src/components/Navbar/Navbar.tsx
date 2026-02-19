@@ -9,6 +9,8 @@ interface NavbarProps {
   t: {
     home: string;
     about: string;
+    education: string;
+    services: string;
     skills: string;
     projects: string;
     contact: string;
@@ -48,6 +50,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, language, toggleLan
         <div className={`nav-links ${isOpen ? 'open' : ''}`}>
           <a href="#home" className="nav-link" onClick={closeMenu}>{t.home}</a>
           <a href="#about" className="nav-link" onClick={closeMenu}>{t.about}</a>
+          <a href="#education" className="nav-link" onClick={closeMenu}>{t.education}</a>
+          <a href="#services" className="nav-link" onClick={closeMenu}>{t.services}</a>
           <a href="#skills" className="nav-link" onClick={closeMenu}>{t.skills}</a>
           <a href="#projects" className="nav-link" onClick={closeMenu}>{t.projects}</a>
           <a href="#contact" className="nav-link" onClick={closeMenu}>{t.contact}</a>

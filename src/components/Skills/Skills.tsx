@@ -1,54 +1,29 @@
-
 import React from 'react';
 import './Skills.css';
 import SkillBar from '../SkillBar/SkillBar';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 
+interface Skill {
+  skill: string;
+  level: number;
+}
+
+interface SkillCategory {
+  title: string;
+  skills: Skill[];
+}
+
 interface SkillsProps {
   t: {
     title: string;
+    categories: SkillCategory[];
   };
 }
 
 const Skills: React.FC<SkillsProps> = ({ t }) => {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
+  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2, rootMargin: '0px' });
 
-  const categories = [
-    {
-      title: 'Frontend Development',
-      skills: [
-        { skill: 'HTML5 Essentials', level: 95 },
-        { skill: 'CSS Essentials', level: 90 },
-        { skill: 'JavaScript', level: 85 },
-        { skill: 'TypeScript', level: 80 },
-        { skill: 'React', level: 85 },
-        { skill: 'Bootstrap', level: 90 },
-      ]
-    },
-    {
-      title: 'Backend Development',
-      skills: [
-        { skill: 'NodeJS + Express', level: 75 },
-        { skill: 'MongoDB', level: 70 },
-      ]
-    },
-    {
-      title: 'Tools & Workflow',
-      skills: [
-        { skill: 'Git & GitHub', level: 85 },
-        { skill: 'Docker Basics', level: 60 },
-      ]
-    },
-    {
-      title: 'Professional Skills',
-      skills: [
-        { skill: 'Prompt Engineering', level: 90 },
-        { skill: 'UX/UI Principles', level: 80 },
-        { skill: 'Code Style & Best Practices', level: 85 },
-        { skill: 'Functional Documentation', level: 70 },
-      ]
-    }
-  ];
+  const categories = t.categories;
 
   return (
     <section id="skills" className="skills-section" ref={ref}>
