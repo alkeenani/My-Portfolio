@@ -1,14 +1,16 @@
-
 :root {
-  /* Light Theme */
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --card-bg: #f8f9fa;
-  --border-color: #dee2e6;
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Light Theme - Sage & Copper */
+  --bg-color: #F6F4EE;
+  --text-color: #202B2B;
+  --text-secondary: #4D5C5B;
+  --primary-color: #36766F;
+  --primary-hover: #2B5E58;
+  --primary-btn-text: #FFFFFF;
+  --accent-color: #D8895B;
+  --card-bg: #FFFFFF;
+  --border-color: #DDD8CE;
+  --nav-bg: #FFFFFF;
+  --shadow: 0 8px 24px rgba(32, 43, 43, 0.07);
 
   /* Spacing */
   --spacing-sm: 0.5rem;
@@ -17,17 +19,36 @@
   --spacing-xl: 4rem;
 
   /* Fonts */
-  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-main: 'Inter', 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Outfit', 'Cairo', sans-serif;
 }
 
 [data-theme='dark'] {
   /* Dark Theme */
-  --bg-color: #1a1a1a;
-  --text-color: #e0e0e0;
-  --primary-color: #4dabf7;
-  --secondary-color: #adb5bd;
-  --card-bg: #2d2d2d;
-  --border-color: #404040;
-  --nav-bg: rgba(26, 26, 26, 0.9);
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --bg-color: #171D1C;
+  --text-color: #F2F0E9;
+  --text-secondary: #A2ACA8;
+  --primary-color: #83B8AB;
+  --primary-hover: #9AC7BC;
+  --primary-btn-text: #171D1C;
+  --accent-color: #DFA17D;
+  --card-bg: #1F2726;
+  --border-color: #2C3634;
+  --nav-bg: #1F2726;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme='winter'] {
+  /* Winter Theme */
+  --bg-color: #EDF5F5;
+  --text-color: #1E4549;
+  --text-secondary: #4A6C70;
+  --primary-color: #4D9298;
+  --primary-hover: #3D7B80;
+  --primary-btn-text: #FFFFFF;
+  --accent-color: #D69A87;
+  --card-bg: #FAFCFC;
+  --border-color: #D1DFDF;
+  --nav-bg: #FAFCFC;
+  --shadow: 0 8px 24px rgba(30, 69, 73, 0.08);
 }

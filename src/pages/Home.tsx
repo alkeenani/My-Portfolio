@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar/Navbar';
+import NavDock from '../components/NavDock/NavDock';
 import Hero from '../components/Hero/Hero';
 import About from '../components/About/About';
 import Education from '../components/Education/Education';
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Navbar 
+      <NavDock 
         theme={theme} 
         toggleTheme={toggleTheme} 
         language={language} 

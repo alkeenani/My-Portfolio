@@ -1,8 +1,10 @@
-
-import React from 'react';
-import './Hero.css';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ArrowUpRight, Mail } from 'lucide-react';
 import SocialLinks from '../SocialLinks/SocialLinks';
 import heroImg from '../../assets/img/IMG.png';
+import './Hero.css';
 
 interface HeroProps {
   t: {
@@ -17,118 +19,199 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ t }) => {
-  // Tilt State
-  const [rotation, setRotation] = React.useState({ x: 0, y: 0 });
-  
-  // Drag State
-  const [position, setPosition] = React.useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
 
-  // Tilt Handler
+  useGSAP(
+    () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        gsap.set(
+          [
+            '.hero-role-tag',
+            '.hero-greeting',
+            '.hero-name',
+            '.hero-description',
+            '.hero-actions .btn',
+            '.hero-socials',
+            '.portrait-backdrop',
+            '.portrait-frame',
+            '.portrait-accent-pill',
+          ],
+          { opacity: 1, visibility: 'visible', clearProps: 'all' }
+        );
+        return;
+      }
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(
+        '.hero-role-tag',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6 }
+      )
+        .fromTo(
+          '.hero-greeting',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5 },
+          '-=0.4'
+        )
+        .fromTo(
+          '.hero-name',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          '-=0.3'
+        )
+        .fromTo(
+          '.hero-description',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          '-=0.4'
+        )
+        .fromTo(
+          '.hero-actions .btn',
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.12, duration: 0.5 },
+          '-=0.3'
+        )
+        .fromTo(
+          '.hero-socials',
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5 },
+          '-=0.2'
+        )
+        .fromTo(
+          backdropRef.current,
+          { scale: 0.92, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.8 },
+          0.2
+        )
+        .fromTo(
+          frameRef.current,
+          {
+            clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+            opacity: 0,
+            y: 20,
+          },
+          {
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: 'power4.out',
+          },
+          0.35
+        )
+        .fromTo(
+          '.portrait-accent-pill',
+          { scale: 0.8, opacity: 0, y: 10 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.5)' },
+          '-=0.3'
+        );
+    },
+    { scope: containerRef }
+  );
+
+  // Restrained pointer-depth parallax (no spin, no exaggerated rotation)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDragging) {
-      handleDragMove(e);
-      return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!visualRef.current) return;
+
+    const rect = visualRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+    const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+    if (frameRef.current) {
+      gsap.to(frameRef.current, {
+        x: x * 10,
+        y: y * 10,
+        duration: 0.5,
+        ease: 'power1.out',
+      });
     }
-    
-    // Calculate rotation based on mouse position relative to image center
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left; // Mouse X inside element
-    const y = e.clientY - rect.top;  // Mouse Y inside element
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -10; // Reduced tilt for subtlety
-    const rotateY = ((x - centerX) / centerX) * 10;
-
-    setRotation({ x: rotateX, y: rotateY });
+    if (backdropRef.current) {
+      gsap.to(backdropRef.current, {
+        x: -x * 8,
+        y: -y * 8,
+        duration: 0.6,
+        ease: 'power1.out',
+      });
+    }
   };
 
   const handleMouseLeave = () => {
-    if (!isDragging) {
-      setRotation({ x: 0, y: 0 }); // Reset tilt
+    if (frameRef.current) {
+      gsap.to(frameRef.current, { x: 0, y: 0, duration: 0.7, ease: 'power2.out' });
+    }
+    if (backdropRef.current) {
+      gsap.to(backdropRef.current, { x: 0, y: 0, duration: 0.7, ease: 'power2.out' });
     }
   };
 
-  // Drag Handlers
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
-  };
-
-  const handleDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    
-    let newX = e.clientX - dragStart.x;
-    let newY = e.clientY - dragStart.y;
-    
-    // Constrain movement within +/- 50px
-    const limit = 50;
-    newX = Math.max(-limit, Math.min(limit, newX));
-    newY = Math.max(-limit, Math.min(limit, newY));
-    
-    setPosition({ x: newX, y: newY });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    // Snap back to center
-    setPosition({ x: 0, y: 0 }); 
-  };
-
   return (
-    <section id="home" className="hero" onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
-      <div className="hero-container">
-        <div className="hero-text-content">
-          <div className="badge-container">
-            <span className="hero-badge">✨ Available for work</span>
+    <section id="home" className="hero-section" ref={containerRef}>
+      <div className="hero-inner container">
+        {/* Text Content Column */}
+        <div className="hero-content">
+          <div className="hero-role-tag">
+            <span className="role-dot" aria-hidden="true" />
+            <span className="role-text">{t.title}</span>
           </div>
+
           <span className="hero-greeting">{t.greeting}</span>
+
           <h1 className="hero-name">
             {t.name}
-            <span className="dot">.</span>
+            <span className="hero-period">.</span>
           </h1>
-          <h2 className="hero-title">{t.title}</h2>
+
           <p className="hero-description">{t.description}</p>
-          
+
           <div className="hero-actions">
-            <a href="#projects" className="btn btn-primary btn-lg btn-glow">
-              <span className="btn-icon">⚡</span> {t.cta}
+            <a href="#projects" className="btn btn-primary">
+              <span>{t.cta}</span>
+              <ArrowUpRight size={18} strokeWidth={2.2} />
             </a>
-            <a href="#contact" className="btn btn-outline btn-lg">{t.hireMe}</a>
+            <a href="#contact" className="btn btn-secondary">
+              <span>{t.hireMe}</span>
+              <Mail size={17} strokeWidth={2.2} />
+            </a>
           </div>
 
-          <SocialLinks />
+          <div className="hero-socials">
+            <SocialLinks />
+          </div>
         </div>
-        
-        {/* Interactive Image Container */}
-        <div 
+
+        {/* Visual Column: Art-Directed Portrait with Solid Layered Framing */}
+        <div
           className="hero-visual"
+          ref={visualRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          onMouseDown={handleMouseDown}
-          style={{
-            transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) translate(${position.x}px, ${position.y}px)`,
-            cursor: isDragging ? 'grabbing' : 'grab',
-          }}
         >
-          <div className="glass-card hero-card-bg"></div>
-          <div className="hero-image-wrapper">
-            <img 
-              src={heroImg} 
-              alt="Profile" 
-              className="hero-image"
+          {/* Solid Backdrop Frame in Copper / Sage */}
+          <div className="portrait-backdrop" ref={backdropRef} aria-hidden="true" />
+
+          {/* Main Portrait Frame with Solid Background & Border */}
+          <div className="portrait-frame" ref={frameRef}>
+            <img
+              src={heroImg}
+              alt={t.name}
+              className="portrait-img"
               draggable="false"
+              loading="eager"
             />
           </div>
-          
-          {/* Decorative Elements */}
-          <div className="floating-badge badge-react">
-            <span>⚛️ React</span>
-          </div>
-          <div className="floating-badge badge-ts">
-            <span>TS TypeScript</span>
+
+          {/* Subtle Accent Detail Pill */}
+          <div className="portrait-accent-pill">
+            <span className="pill-badge">MERN</span>
+            <span className="pill-text">React & TypeScript</span>
           </div>
         </div>
       </div>

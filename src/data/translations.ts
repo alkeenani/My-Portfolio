@@ -12,7 +12,7 @@ export const translations = {
     hero: {
       greeting: "Hello, I'm",
       name: "Mohamed Ebrahim",
-      title: "MERN Stack Developer",
+      title: "Junior MERN Stack Developer",
       description: "From concept to deployment — I build fast, scalable, and conversion-focused web apps.",
       cta: "View My Work",
       hireMe: "Hire Me",
@@ -21,7 +21,7 @@ export const translations = {
     about: {
       title: "About Me",
       description: [
-        "Hello! I’m Mohamed Ibrahim, a passionate MERN Stack Developer with a keen eye for detail and a drive for building robust web applications.",
+        "Hello! I’m Mohamed Ibrahim, a passionate Junior MERN Stack Developer with a keen eye for detail and a drive for building robust web applications.",
         "While I specialize in the MERN Stack (MongoDB, Express, React, Node.js), my approach goes beyond just writing code. With a solid grounding in UX/UI principles, I bridge the gap between functional backend logic and intuitive frontend design. I am committed to writing clean, maintainable code using TypeScript and modern design patterns.",
         "I leverage Prompt Engineering to optimize workflows and solve complex problems efficiently. My technical toolkit also includes Docker for containerization and Unit Testing to ensure reliability. I am a fast learner who thrives in collaborative environments, always aiming to deliver high-performance solutions."
       ],
@@ -140,7 +140,7 @@ export const translations = {
     hero: {
       greeting: "مرحباً، أنا",
       name: "محمد إبراهيم",
-      title: "MERN Stack Developer",
+      title: "Junior MERN Stack Developer",
       description: "من الفكرة إلى النشر — أقوم ببناء تطبيقات ويب سريعة وقابلة للتوسع ومركزة على التحويل.",
       cta: "شاهد أعمالي",
       hireMe: "وظفني",

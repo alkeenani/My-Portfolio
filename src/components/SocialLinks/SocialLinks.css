@@ -1,30 +1,29 @@
 .social-links-hero {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .social-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--card-bg); /* Glass effect base */
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   color: var(--text-color);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .social-icon:hover {
-  transform: translateY(-5px) scale(1.1);
-  background: var(--bg-color);
+  transform: translateY(-3px);
+  background-color: var(--dock-active-bg);
   color: var(--primary-color);
   border-color: var(--primary-color);
-  box-shadow: 0 10px 20px -10px var(--primary-glow);
+  box-shadow: var(--shadow-md);
 }
 
 .social-icon svg {

@@ -16,39 +16,40 @@ const Background: React.FC = () => {
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     containerRef.current.appendChild(renderer.domElement);
 
     // Particles (Stars/Snow)
-    const particleCount = theme === 'winter' ? 1500 : 700;
+    const particleCount = theme === 'winter' ? 900 : 500;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
-    const velocities = [];
+    const velocities: { x: number; y: number; z: number }[] = [];
 
     // Initial Positions
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 2000; // x
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 2000; // y
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 2000; // z
+      positions[i * 3] = (Math.random() - 0.5) * 2000;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 2000;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 2000;
       
       velocities.push({
-        x: (Math.random() - 0.5) * 0.5,
-        y: (Math.random() - 0.5) * 0.5, 
-        z: (Math.random() - 0.5) * 0.5
+        x: (Math.random() - 0.5) * 0.4,
+        y: theme === 'winter' ? -Math.random() * 0.8 - 0.2 : (Math.random() - 0.5) * 0.4, 
+        z: (Math.random() - 0.5) * 0.4
       });
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-    // Material logic based on theme
+    // Sage & Copper themed particle color
     const getMaterial = () => {
-      const color = theme === 'winter' ? 0x00bcd4 : (theme === 'dark' ? 0xffffff : 0x000000);
+      // Winter: Muted Cyan (0x4D9298), Dark: Soft Sage (0x83B8AB), Light: Sage Teal (0x36766F)
+      const color = theme === 'winter' ? 0x4D9298 : (theme === 'dark' ? 0x83B8AB : 0x36766F);
       return new THREE.PointsMaterial({
         color: color,
-        size: theme === 'winter' ? 4 : 2,
+        size: theme === 'winter' ? 3 : 2,
         transparent: true,
-        opacity: 0.8,
-        sizeAttenuation: true // sizes particles based on depth
+        opacity: theme === 'light' ? 0.35 : (theme === 'winter' ? 0.65 : 0.55),
+        sizeAttenuation: true
       });
     };
 
@@ -66,13 +67,24 @@ const Background: React.FC = () => {
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      // Rotate entire system slowly
-      particles.rotation.x += 0.0005;
-      particles.rotation.y += 0.0005;
+      // Rotate particle system slowly
+      particles.rotation.x += 0.0003;
+      particles.rotation.y += 0.0003;
+
+      if (theme === 'winter') {
+        const pos = geometry.attributes.position.array as Float32Array;
+        for (let i = 0; i < particleCount; i++) {
+          pos[i * 3 + 1] -= 0.6; // Snow falling
+          if (pos[i * 3 + 1] < -1000) {
+            pos[i * 3 + 1] = 1000;
+          }
+        }
+        geometry.attributes.position.needsUpdate = true;
+      }
 
       // Parallax via mouse
-      camera.position.x += (mouseX - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY - camera.position.y) * 0.05;
+      camera.position.x += (mouseX - camera.position.x) * 0.04;
+      camera.position.y += (-mouseY - camera.position.y) * 0.04;
       camera.lookAt(scene.position);
 
       renderer.render(scene, camera);
@@ -88,21 +100,19 @@ const Background: React.FC = () => {
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      mouseX = (event.clientX - window.innerWidth / 2) * 0.5; // Scale factor
-      mouseY = (event.clientY - window.innerHeight / 2) * 0.5;
+      mouseX = (event.clientX - window.innerWidth / 2) * 0.4;
+      mouseY = (event.clientY - window.innerHeight / 2) * 0.4;
     };
 
     window.addEventListener('resize', handleResize);
     document.addEventListener('mousemove', handleMouseMove);
 
-    // Cleanup
-    const currentContainer = containerRef.current; // capture ref value
+    const currentContainer = containerRef.current;
     return () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
       
-      // Three.js cleanup
       geometry.dispose();
       material.dispose();
       renderer.dispose();
@@ -111,7 +121,7 @@ const Background: React.FC = () => {
         currentContainer.removeChild(renderer.domElement);
       }
     };
-  }, [theme]); // Re-run when theme changes
+  }, [theme]);
 
   return <div ref={containerRef} className="three-background" />;
 };

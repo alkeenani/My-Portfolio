@@ -1,72 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
 :root {
-  /* Premium Colors - Light Mode */
-  --bg-color: #ffffff;
-  --text-color: #1a1a1a;
-  --text-secondary: #555555;
-  --primary-color: #2563eb; /* Royal Blue */
-  --primary-glow: rgba(37, 99, 235, 0.3);
-  --accent-color: #f59e0b; /* Amber */
-  --card-bg: rgba(255, 255, 255, 0.7); /* Glass effect base */
-  --nav-bg: rgba(255, 255, 255, 0.8);
-  --border-color: rgba(0, 0, 0, 0.1);
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  /* Sage & Copper — Light Mode */
+  --bg-color: #F6F4EE;            /* Warm Ivory */
+  --text-color: #202B2B;          /* Graphite */
+  --text-secondary: #4D5C5B;      /* Muted Graphite */
+  --primary-color: #36766F;       /* Sage Teal */
+  --primary-hover: #2B5E58;       /* Deeper Sage */
+  --primary-btn-text: #FFFFFF;    /* White text on Sage */
+  --accent-color: #D8895B;        /* Copper */
+  --accent-hover: #C27447;
   
-  /* Glassmorphism Utilities */
-  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
-  --glass-blur: blur(12px);
+  /* Solid Surfaces */
+  --card-bg: #FFFFFF;
+  --card-bg-subtle: #F0EDE5;
+  --dock-bg: #FFFFFF;
+  --dock-border: #DDD8CE;
+  --dock-active-bg: #EAF1F0;
+  --dock-active-icon: #36766F;
+  --dock-icon-color: #5A6968;
+  --dock-tooltip-bg: #202B2B;
+  --dock-tooltip-text: #F6F4EE;
+
+  --border-color: #DDD8CE;
+  --border-hover: #C5BEB2;
+  --shadow-sm: 0 2px 8px rgba(32, 43, 43, 0.04);
+  --shadow-md: 0 8px 24px rgba(32, 43, 43, 0.07);
+  --shadow-lg: 0 16px 36px rgba(32, 43, 43, 0.1);
+  --shadow: 0 8px 24px rgba(32, 43, 43, 0.07);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
-  --spacing-lg: 5rem;
-  --spacing-xl: 10rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 7rem;
 
   /* Typography */
-  --font-main: 'Cairo', 'Inter', 'Segoe UI', sans-serif;
-  --font-heading: 'Cairo', 'Outfit', 'Segoe UI', sans-serif;
+  --font-main: 'Inter', 'Cairo', 'Segoe UI', sans-serif;
+  --font-heading: 'Outfit', 'Cairo', 'Segoe UI', sans-serif;
 }
 
 [data-theme="dark"] {
-  /* Premium Colors - Dark Mode */
-  --bg-color: #050510; /* Deep Blue-Black */
-  --text-color: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --primary-color: #60a5fa; /* Cyan/Blue */
-  --primary-glow: rgba(96, 165, 250, 0.4);
-  --accent-color: #fbbf24;
-  --card-bg: rgba(20, 20, 35, 0.6);
-  --nav-bg: rgba(5, 5, 16, 0.85);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  
-  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Sage & Copper — Dark Mode */
+  --bg-color: #171D1C;            /* Charcoal */
+  --text-color: #F2F0E9;          /* Warm White */
+  --text-secondary: #A2ACA8;      /* Muted Soft Sage */
+  --primary-color: #83B8AB;       /* Soft Sage */
+  --primary-hover: #9AC7BC;
+  --primary-btn-text: #171D1C;    /* Charcoal text on Soft Sage */
+  --accent-color: #DFA17D;        /* Copper */
+  --accent-hover: #ECC0A4;
+
+  /* Solid Surfaces */
+  --card-bg: #1F2726;
+  --card-bg-subtle: #242E2C;
+  --dock-bg: #1F2726;
+  --dock-border: #2C3634;
+  --dock-active-bg: #283734;
+  --dock-active-icon: #83B8AB;
+  --dock-icon-color: #929E9B;
+  --dock-tooltip-bg: #F2F0E9;
+  --dock-tooltip-text: #171D1C;
+
+  --border-color: #2C3634;
+  --border-hover: #3C4A47;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.45);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="winter"] {
-  /* Winter Mode ❄ */
-  --bg-color: #e0f7fa; /* Icy Blue */
-  --text-color: #006064; /* Deep Cyan */
-  --text-secondary: #00838f;
-  --primary-color: #00bcd4; /* Cyan */
-  --primary-glow: rgba(0, 188, 212, 0.5);
-  --accent-color: #84ffff;
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --nav-bg: rgba(224, 247, 250, 0.9);
-  --border-color: rgba(178, 235, 242, 0.8);
-  --shadow: 0 8px 30px rgba(0, 188, 212, 0.15);
-  
-  --glass-border: 1px solid rgba(255, 255, 255, 0.6);
-  --glass-blur: blur(15px);
-}
+  /* Sage & Copper — Winter Mode */
+  --bg-color: #EDF5F5;            /* Ice Mist */
+  --text-color: #1E4549;          /* Deep Petrol */
+  --text-secondary: #4A6C70;      /* Muted Petrol */
+  --primary-color: #4D9298;       /* Muted Cyan */
+  --primary-hover: #3D7B80;
+  --primary-btn-text: #FFFFFF;    /* White on Muted Cyan */
+  --accent-color: #D69A87;        /* Dusty Coral */
+  --accent-hover: #C5836F;
 
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap');
+  /* Solid Surfaces */
+  --card-bg: #FAFCFC;
+  --card-bg-subtle: #E2ECEC;
+  --dock-bg: #FAFCFC;
+  --dock-border: #D1DFDF;
+  --dock-active-bg: #E2EEEE;
+  --dock-active-icon: #4D9298;
+  --dock-icon-color: #557578;
+  --dock-tooltip-bg: #1E4549;
+  --dock-tooltip-text: #EDF5F5;
+
+  --border-color: #D1DFDF;
+  --border-hover: #B8CCCC;
+  --shadow-sm: 0 2px 8px rgba(30, 69, 73, 0.05);
+  --shadow-md: 0 8px 24px rgba(30, 69, 73, 0.08);
+  --shadow-lg: 0 16px 36px rgba(30, 69, 73, 0.12);
+  --shadow: 0 8px 24px rgba(30, 69, 73, 0.08);
+}
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* cursor: none !important; - Removed to keep default cursor */
 }
 
 html {
@@ -78,20 +116,20 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.7;
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 ul {
@@ -102,6 +140,7 @@ button {
   cursor: pointer;
   border: none;
   font-family: inherit;
+  background: none;
 }
 
 /* Scrollbar */
@@ -114,7 +153,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
+  background: var(--border-hover);
   border-radius: 4px;
 }
 
@@ -122,12 +161,45 @@ button {
   background: var(--primary-color);
 }
 
-/* Utility Class for Glass Cards */
+/* Solid Card Utility */
 .glass-card {
-  background: var(--card-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow);
   border-radius: 16px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-color);
+  position: relative;
+  font-weight: 700;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background-color: var(--accent-color);
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
